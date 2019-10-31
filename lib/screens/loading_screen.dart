@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clima_app/screens/location_screen.dart';
 import 'package:flutter_clima_app/services/location.dart';
 import 'package:flutter_clima_app/open_weather_map_api_key.dart';
 import 'package:flutter_clima_app/services/networking.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -25,6 +27,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     var weatherData = await networkHelper.getData();
 
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return LocationScreen();
+        },
+      ),
+    );
+
     print('Current location: ${location.latitude}, ${location.longitude}');
   }
 
@@ -36,6 +47,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
+        ),
+      ),
+    );
   }
 }
