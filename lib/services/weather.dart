@@ -5,6 +5,15 @@ import 'package:flutter_clima_app/services/networking.dart';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherModel {
+  Future<dynamic> getCityWeather(String cityName) async {
+    var url =
+        '$openWeatherMapURL?q=$cityName&appid=$openWeatherMapApiKey&units=metric';
+    NetworkHelper networkHelper = NetworkHelper(url: url);
+
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   Future<dynamic> getLocationWeather() async {
     final location = Location();
     await location.getCurrentLocation();
